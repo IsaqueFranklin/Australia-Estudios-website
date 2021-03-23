@@ -1,0 +1,235 @@
+<link href="https://fonts.googleapis.com/css2?family=Slabo+27px&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amethysta&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Maitree&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500&display=swap" rel="stylesheet">
+
+<meta name="description"
+  content="Veja toda as publicações mais recentes. Crie seu blog e comece a compartilhar seu conteúdo gratuitamente.">
+
+  <div class="center tela">
+      <img src="img/logo3.png" class="im">
+      <br>
+      <h2 class="title">Blog Austrália Estúdios</h2>
+      <p class="text">Leia os posts mais recentes.</p>
+      <br>
+      <br>
+  </div>
+
+    {{#each posts}}
+    <div class="card mb-3 borda border-light">
+      <div class="row no-gutters">
+        <div class="col-md-2">
+          <img src="{{thumb}}" class="card-img ig" alt="thumbnail">
+        </div>
+        <div class="card-body">
+          <small class="card-text">Publicado em {{data}}</small>
+          <br>
+          <h7 class="title2">{{titulo}}</h7>
+          <br>
+          <p class="text2">Escrito por {{autor}}</p>
+          <a href="/website/ler/{{_id}}" class=""><button class="btns">Ler mais</button></a>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+
+<br>
+<br>
+
+  <style>
+  .marker {
+    background-color: Yellow;
+  }
+
+  .tela {
+    background-image: url('img/');
+    margin-top: 0px;
+  }
+
+  .pos {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+  }
+
+  .butao {
+    border-radius: 5px;
+    text-transform: initial;
+    background-color: #90EE90;
+    border: 5px;
+    color:black;
+    font-size: 12px;
+    height: 30px;
+    width: 65px;
+  }
+
+  .btns {
+        background-color: transparent;
+        color: #060d13;
+        padding: 4px 10px;
+        border: 1px solid #060d13;
+        transition: all 0.3s ease-out;
+    }
+
+    .btns:hover,
+    .btns:hover {
+        background: #060d13;
+        color: #fff;
+        transition: all 0.3s ease-out;
+    }
+
+  .butao2 {
+    border-radius: 5px;
+    text-transform: initial;
+    background-color: #ff5050;
+    border: 5px;
+    color:white;
+    font-size: 12px;
+    height: 30px;
+    width: 65px;
+  }
+
+  .butao3 {
+    border-radius: 5px;
+    text-transform: initial;
+    background-color:#0d0d0d;
+    border: 5px;
+    color:white;
+    font-size: 12px;
+    height: 30px;
+    width: 65px;
+  }
+
+  .lop {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  .title {
+    font-family: 'Big Shoulders Display', cursive;
+    font-size: 30px;
+  }
+
+  .title2 {
+    font-family: 'Big Shoulders Display', cursive;
+    font-size: 20px;
+  }
+
+  .text {
+    font-family: 'Slabo 27px', serif;
+    font-size: 15px;
+  }
+
+
+  .di {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  button {
+    border: none;
+    background-color: white;
+  }
+
+  .dog {
+    width: 600px;
+  }
+
+  .bm {
+    text-transform: initial;
+    text-decoration: none;
+    color: #006600;
+  }
+
+  @media (min-width: 1200px) {
+
+    .diu {
+      margin-left: 300px;
+      margin-right: 300px;
+    }
+
+    .ig {
+      height: 150px;
+      margin-bottom: 0px;
+    }
+
+    .borda {
+      margin-left: 150px;
+      margin-right: 150px;
+      height: 150px;
+    }
+
+  }
+
+  @media (min-width: 1000px) and (max-width: 1200px) {
+
+    .diu {
+      margin-left: 100px;
+      margin-right: 100px;
+    }
+
+    .borda {
+      margin-left: 150px;
+      margin-right: 150px;
+      height: 150px;
+    }
+
+    .ig {
+      height: 150px;
+      margin-bottom: 0px;
+    }
+
+  }
+
+  @media (min-width: 768px) and (max-width: 1000px){
+
+    .ig {
+      height: 150px;
+      margin-bottom: 0px;
+    }
+
+    .borda {
+      margin-left: 50px;
+      margin-right: 50px;
+      height: 150px;
+    }
+
+  }
+
+  @media (min-width: 700px) amd (max-width: 800px){
+  img {
+    max-width: 500px;
+  }
+
+  }
+  @media (max-width: 800px) {
+
+    .diu {
+      margin-left: 25px;
+      margin-right: 25px;
+    }
+
+    .borda {
+      margin-right: 5px;
+      margin-left: 5px;
+    }
+
+
+    .borda2 {
+      margin-right: 0px;
+      margin-left: 0px;
+      padding: 0px;
+      margin-top: 0px;
+    }
+
+    .ig {
+      width: 100%;
+    }
+
+  }
+
+  .im {
+    height: 200px;
+    width: 200px;
+  }
+  </style>

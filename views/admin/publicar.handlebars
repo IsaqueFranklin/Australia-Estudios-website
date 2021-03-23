@@ -1,0 +1,85 @@
+<div class="card di center">
+  <div class="card-body">
+    <img src="img/logo3.png" alt="Nova publicação" class="ig">
+    <h5 class="card-title">Nova publicação</h5>
+    <br>
+    <p class="text">Escreva sua nova publicação adicionando imagens, marcadores, links e várias outras coisas
+      divertidas. :)</p>
+    <br>
+    <br>
+    <form action="/admin/publicar" method="post">
+      <br>
+      <input type="text" name="data" class="form-control"
+        placeholder="Data de publicação no formato xx/xx/xxxx"></input>
+      <br>
+      <br>
+      <input type="text" name="titulo" class="form-control" placeholder="Título para ser exibido"></input>
+      <br>
+      <br>
+      <input type="text" name="thumb" class="form-control" placeholder="Imagem de capa"></input>
+      <br>
+      <br>
+      <textarea name="editor" id="editor" class="textarea"></textarea>
+      <br>
+      <br>
+      <br>
+      <button type="submit" class="butao">Publicar</button>
+    </form>
+    <br>
+  </div>
+</div>
+
+<script src="ckeditor/ckeditor.js"></script>
+<script>
+  CKEDITOR.replace('editor');
+  config.htmlEncodeOutput = true;
+  var data = CKEDITOR.instances.coment.getData()
+
+
+</script>
+
+<style>
+  .lop {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  .butao {
+    border-radius: 5px;
+    text-transform: initial;
+    background-color: #90EE90;
+    border: 5px;
+    color:black;
+    font-size: 15px;
+    height: 40px;
+    width: 85px;
+  }
+
+
+  .textarea {
+    height: 800px;
+  }
+
+  .ig {
+    height: 200px;
+    width: 200px;
+  }
+
+  @media(min-width: 1000px){
+    .di {
+    margin-left: 150px;
+    margin-right: 150px;
+    margin-bottom: 150px;
+    margin-top: 150px;
+  }
+  }
+
+  @media(max-width: 1000px){
+    .di {
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+  }
+  }
+</style>

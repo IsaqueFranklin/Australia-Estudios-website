@@ -1,0 +1,84 @@
+<link href="https://fonts.googleapis.com/css2?family=Slabo+27px&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amethysta&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Maitree&display=swap" rel="stylesheet">
+
+<div class="card di center">
+  <div class="card-body">
+    <br>
+    <br>
+    <img src="img/man.png">
+    <br>
+    <br>
+    <h5 class="title">Editando publicação</h5>
+    <br>
+    <br>
+    <hr>
+    <a href="/admin/excluirpost/{{posts._id}}"><img src="img/excluir.png"></a>
+    <small class="">Deletar publicação</small>
+    <hr>
+    <br>
+    <br>
+    <form action="/admin/post/edit" method="post">
+      <input type="hidden" name="id" value="{{posts._id}}"></input>
+      <input type="text" name="data" class="form-control" placeholder="Data de publicação"
+        value="{{posts.data}}"></input>
+      <br>
+      <br>
+      <input type="text" name="title" class="form-control" placeholder="Título para ser exibido"
+        value="{{posts.titulo}}"></input>
+      <br>
+      <br>
+      <input type="text" name="thumb" class="form-control" placeholder="Imagem de capa" value="{{posts.thumb}}"></input>
+      <br>
+      <br>
+      <textarea name="coment" class="textarea">{{posts.conteudo}}</textarea>
+      <br>
+      <br>
+      <br>
+      <button type="submit" class="btn btn-dark">Editar</button>
+    </form>
+    <br>
+    <hr>
+  </div>
+</div>
+
+<script src="ckeditor/ckeditor.js"></script>
+<script>
+  CKEDITOR.replace('coment');
+  config.htmlEncodeOutput = true;
+  var data = CKEDITOR.instances.coment.getData()
+
+
+</script>
+
+<style>
+  .lop {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  .title {
+    font-family: 'Amethysta', serif;
+    font-size: 30px;
+  }
+
+  .text {
+    font-family: 'Slabo 27px', serif;
+    font-size: 20px;
+  }
+
+  .di {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+
+  button {
+    border: none;
+    background-color: white;
+  }
+
+  .textarea {
+    height: 800px;
+  }
+</style>
