@@ -46,7 +46,7 @@ app.set('view engine', 'handlebars')
 //Mongoose
 
 mongoose.Promise = global.Promise
-mongoose.connect('mongodb+srv://AustraliaEstudios:b1l1ona1re@cluster0.puuiz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority').then(function(){
+mongoose.connect("mongodb+srv://AustraliaEstudios:b1l1ona1re@cluster0.puuiz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority").then(function(){
     console.log('Conectado ao mongo.')
   }).catch(function(err){
     console.log('Erro ao se conectar com o mongo: '+err)
