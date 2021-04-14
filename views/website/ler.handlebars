@@ -5,13 +5,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300&display=swap" rel="stylesheet">
 
 <meta name="description"
-  content="Leia o post {{posts.titulo}} de {{posts.autor}} publicado em {{posts.data}}. Crie seu blog gratuitamente.">
+  content="Leia o post {{posts.titulo}} de {{posts.autor}} publicado em {{posts.data}}.">
 <div class="card dog">
   <div class="card-body justify di">
+    <br>
     <p class="text diu">Publicado em {{posts.data}} por <a href="/website/blog">{{posts.autor}}</a></p>
     <br>
     <h5 class="title diu">{{posts.titulo}}</h5>
     <br>
+    <div class='center total'>
+      <img src='{{posts.thumb}}' alt='imagem de capa do post' class='igk' />
+      <br>
+    </div>
+    <br>
+    <hr>
     <br>
     <div align="justify" class="diu">
       {{{posts.conteudo}}}
@@ -53,6 +60,15 @@
   </div>
 
 <style>
+  .total {
+    width: 100%;
+  }
+
+  .igk {
+    width: 1000000px;
+    height: 600px;
+  }
+
   .marker {
     background-color: Yellow;
   }
@@ -78,8 +94,8 @@
   }
 
   .di {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 
   .dog {
