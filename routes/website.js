@@ -27,5 +27,13 @@ router.get('/contato', function(req, res){
     res.render('website/contato')
 })
 
+router.get('/designs', function(req, res){
+    res.render('website/designs')
+})
+
+router.get('/milesimosol', function(req, res){
+    res.render('website/milesimosol')
+})
+
 
 module.exports = router
