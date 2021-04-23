@@ -9,15 +9,19 @@ const Admin = mongoose.model('admins')
 require('../models/posts')
 const Post = mongoose.model('posts')
 
+require('../models/podcastPosts')
+const Podcast = mongoose.model('podcasts')
+
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
+const { eUser } = require("../helpers/eUser");
 
 
-router.get('/registro', function(req, res){
+router.get('/registro', eUser,  function(req, res){
     res.render('admin/registro')
 })
 
-router.post('/registro', function(req, res){
+router.post('/registro', eUser, function(req, res){
     var erros = []
 
     if(!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null){
@@ -95,17 +99,17 @@ router.post('/login', function(req, res, next){
     })(req, res, next)
 })
 
-router.get('/logout', function(req, res){
+router.get('/logout', eUser, function(req, res){
     req.logout()
     req.flash('success_msg', 'Deslogado com sucesso.')
     res.redirect('/')
 })
 
-router.get('/publicar', function(req, res){
+router.get('/publicar', eUser, function(req, res){
     res.render('admin/publicar')
 })
 
-router.post('/publicar', function(req, res){
+router.post('/publicar', eUser, function(req, res){
     var erros = [];
 
     if(!req.body.editor || typeof req.body.editor == undefined || req.body.editor == null){
@@ -137,19 +141,19 @@ router.post('/publicar', function(req, res){
     }
 })
 
-router.get('/painel', function (req, res) {
+router.get('/painel', eUser, function (req, res) {
         Post.find({ autor: req.user.nome }).sort({_id: -1}).lean().then(function (posts) {
             res.render('admin/posts', { posts: posts })
         })
     })
 
-router.get('/editarperfil', function(req, res){
+router.get('/editarperfil', eUser, function(req, res){
     Admin.findOne({nome: req.user.nome}).then(function(admin){
         res.render('admin/editarperfil', {admin: admin})
     })
 })
 
-router.post('/editarperfil', function(req, res){
+router.post('/editarperfil', eUser, function(req, res){
     Admin.findOne({nome: req.user.nome}).then(function(admin){
 
         admin.nome = req.body.nome
@@ -168,7 +172,7 @@ router.post('/editarperfil', function(req, res){
     })
 })
 
-router.get('/editarpost/:id', function(req, res){
+router.get('/editarpost/:id', eUser, function(req, res){
     Post.findOne({_id: req.params.id}).lean().then(function(posts){
         res.render('admin/editarpost', {posts: posts})
     }).catch(function(err){
@@ -177,7 +181,7 @@ router.get('/editarpost/:id', function(req, res){
     })
 })
 
-router.get('/excluirpost/:id', function(req, res){
+router.get('/excluirpost/:id', eUser, function(req, res){
     Post.remove({_id: req.params.id}).lean().then(function(){
         req.flash('success_msg', 'Deletado com sucesso.')
         res.redirect('/admin/painel')
@@ -187,7 +191,7 @@ router.get('/excluirpost/:id', function(req, res){
     })
 })
 
-router.post("/post/edit", function (req, res) {
+router.post("/post/edit", eUser, function (req, res) {
     Post.findOne({ _id: req.body.id })
       .then(function (posts) {
         posts.titulo = req.body.title;
@@ -212,6 +216,93 @@ router.post("/post/edit", function (req, res) {
         res.redirect("/admin/painel");
       });
   });
+
+router.get('/painelpodcasts', eUser, function(req, res){
+  Podcast.find().lean().sort({_id: -1}).then(function(podcasts){
+      res.render('admin/painelpodcasts', {podcasts: podcasts})
+  })
+})
+
+router.get('/publicarepisodio', eUser, (req, res) => {
+    res.render('admin/publicarepisodio')
+})
+
+router.post('/publicarepisodio', eUser, (req, res) => {
+    var erros = []
+
+    if(!req.body.content || typeof req.body.content == undefined || req.body.content == null){
+        erros.push({texto: 'Episódio sem conteúdo.'})
+    }
+
+    if(!req.body.title || typeof req.body.title == undefined || req.body.title == null){
+        erros.push({texto: 'Episódio sem título.'})
+    }
+
+    if(!req.body.link || typeof req.body.link == undefined || req.body.link == null){
+        erros.push({texto: 'Episódio sem link do spotify.'})
+    }
+
+    if(erros.legth > 0){
+        res.render('admin/publicaepisodio', {erros: erros})
+    }else {
+       const novoEpisodio = {
+           title: req.body.title,
+           data: req.body.data,
+           content: req.body.content,
+           autor: req.user.nome,
+           link: req.body.link
+       } 
+
+       new Podcast(novoEpisodio).save().then(() => {
+           req.flash('success_msg','Episodio publicado.')
+           res.redirect('/admin/painelpodcasts')
+       }).catch((err) => {
+           req.flash('error_msg','Houve um erro ao publicar episódio.')
+           res.redirect('/admin/publicarepisodio')
+       })
+    }
+})
+
+router.get('/editarpodcast/:id', eUser, (req, res) => {
+    Podcast.findOne({_id: req.params.id}).lean().then((podcasts) => {
+        res.render('admin/editarpodcast', {podcasts: podcasts})
+    }).catch((err) => {
+        req.flash('error_msg', 'Erro interno.')
+        res.redirect('/admin/painelpodcasts')
+    })
+})
+
+router.post('/editarpodcast', eUser, (req, res) => {
+    Podcast.findOne({_id: req.params.id}).then((podcasts) => {
+        podcasts.title = req.body.title;
+        podcasts.content = req.body.content;
+        podcasts.data = req.body.data;
+        podcasts.link = req.body.link;
+
+        podcasts.save().lean().then(() => {
+            req.flash('success_msg', 'Episodio editado com sucesso.')
+            res.redirect('/admin/painelpodcasts')
+        }).catch((err) => {
+            req.flash('error_msg', 'Erro interno.')
+            res.redirect('/admin/editarpodcast')
+        })
+
+    }).catch((err) => {
+        req.flash('error_msg', 'Erro ao salvar edição.')
+        res.redirect('/admin/editarpodcast')
+    })
+})
+
+router.get('/excluirpodcast/:id', eUser, (req, res) => {
+    Podcast.remove({_id: req.params.id}).then(() => {
+        req.flash('success_msg', 'Episódio excluido com sucesso.')
+        res.redirect('/admin/painelpodcasts')
+    }).catch((err) => {
+        req.flash('error_msg', 'Erro ao excluir.')
+        res.redirect('/admin/painelpodcasts')
+    })
+})
+
 
 
 module.exports = router
