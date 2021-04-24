@@ -255,7 +255,7 @@ router.post('/publicarepisodio', eUser, (req, res) => {
 
        new Podcast(novoEpisodio).save().then(() => {
            req.flash('success_msg','Episodio publicado.')
-           res.redirect('/admin/painelpodcasts')
+           res.redirect('/admin/painel')
        }).catch((err) => {
            req.flash('error_msg','Houve um erro ao publicar episódio.')
            res.redirect('/admin/publicarepisodio')
@@ -273,7 +273,7 @@ router.get('/editarpodcast/:id', eUser, (req, res) => {
 })
 
 router.post('/editarpodcast', eUser, (req, res) => {
-    Podcast.findOne({_id: req.params.id}).then((podcasts) => {
+    Podcast.findOne({ _id: req.body.id }).then((podcasts) => {
         podcasts.title = req.body.title;
         podcasts.content = req.body.content;
         podcasts.data = req.body.data;
