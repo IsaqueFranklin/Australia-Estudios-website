@@ -31,28 +31,32 @@
   </div>
 </div>
 
-<div class="card center lop2">
+<div class="card lop2">
   <div class="card-body">
   <br>
-  <h7 class="title" align="center">Posts recentes</h7>
+  <div class='center'>
+    <h7 class="title">Podcasts recentes</h7>
+  </div>
   <br>
   <br>
   {{#each podcast}}
     <br>
-    <div class="card borda border-light center">
+    <div class="card borda border-succes">
         <div class="card-body left">
           <small class="card-text">Publicado em {{data}}</small>
           <br>
-          <br>
-          <h7 class="title2">{{title}}</h7>
-          <a href="/website/ouvir/{{_id}}" class=""><button class="btns">Ouvir</button></a>
+          <h3 class="title2">{{title}}</h3><br>
+          <a href="/website/ouvir/{{_id}}" class=""><button class="btns">Ouvir aqui</button></a>
+          <a href="{{link}}" class=""><button class="btns">Ouvir no Deezer</button></a>
           <br>
         </div>
     </div>
     <br>
   {{/each}}
   <br>
-  <h7 class="text center">Escute todos os podcasts do <a href="/website/podcasts">Austrália Estúdios</a></h7>
+  <div class='center'>
+    <h7 class="text">Escute todos os podcasts do <a href="/website/podcasts">Austrália Estúdios</a></h7>
+  </div>
   <br>
   <br>
   </div>
@@ -149,8 +153,8 @@
     }
 
     .borda {
-      margin-left: 150px;
-      margin-right: 150px;
+      margin-left: 300px;
+      margin-right: 300px;
       height: 150px;
     }
 
